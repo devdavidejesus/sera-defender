@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERA Defender - New Shepard Mission</title>
+    
+    <!-- 
+      SERA DEFENDER - New Shepard Mission
+      Developed by: Davi de Jesus
+      GitHub: https://github.com/devdavidejesus
+      LinkedIn: https://www.linkedin.com/in/davidejesus
+      Email: davidejesus.log@proton.me
+      Date: December 24, 2025
+      Tribute to SERA & Blue Origin
+      Version: 2.0.0 (Enhanced Edition)
+    -->
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- Tela de Início / Start Screen -->
+        <div id="startScreen" class="screen">
+            <div class="retro-border">
+                <h1>SERA DEFENDER</h1>
+                <h2>NEW SHEPARD MISSION</h2>
+                <div class="logo">
+                    <span class="pixel-text">BLUE ORIGIN × SERA</span>
+                </div>
+                <p class="instructions">
+                    🚀 PROTECT NEW SHEPARD! 🚀<br>
+                    🚀 PROTEJA O NEW SHEPARD! 🚀<br>
+                    ← → : MOVE / MOVER<br>
+                    SPACE : SHOOT / ATIRAR<br>
+                    P : PAUSE / PAUSAR<br>
+                    M : MENU<br>
+                    ↑↑↓↓←→←→BA : SECRET
+                </p>
+                <button id="startButton" class="retro-button">START MISSION / INICIAR MISSÃO</button>
+                <div class="developer-info">
+                    Developed by / Desenvolvido por:<br>
+                    <strong>Davi de Jesus</strong><br>
+                    <small>Version 2.0.0 - Enhanced Edition</small>
+                </div>
+                <div class="high-score">
+                    RECORD: <span id="highScoreValue">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de História / Story Screen -->
+        <div id="storyScreen" class="screen hidden">
+            <div class="retro-border story-border">
+                <h1>MISSION BRIEFING</h1>
+                <h2>BRIEFING DA MISSÃO</h2>
+                
+                <div class="story-text">
+                    <p>📍 <strong>LOCATION:</strong> Launch Pad, West Texas</p>
+                    <p>⏰ <strong>TIME:</strong> T-5 minutes to launch</p>
+                    <p>🎯 <strong>MISSION:</strong> Protect New Shepard from asteroid field</p>
+                    <p>⚠️ <strong>THREAT:</strong> Space debris from failed satellite</p>
+                    <p>👨‍🚀 <strong>OBJECTIVE:</strong> Clear path for historic crewed flight</p>
+                    <p>💰 <strong>REWARD:</strong> Complete missions for bonus points</p>
+                </div>
+                
+                <div class="mission-quote">
+                    "For the benefit of Earth"<br>
+                    "Para o benefício da Terra"
+                </div>
+                
+                <div class="countdown">
+                    LAUNCH IN: <span id="countdown">5</span>
+                </div>
+                
+                <button id="skipStoryButton" class="retro-button">SKIP / PULAR</button>
+                <button id="startGameButton" class="retro-button hidden">LAUNCH NOW / LANÇAR AGORA</button>
+            </div>
+        </div>
+
+        <!-- Tela do Jogo -->
+        <div id="gameScreen" class="screen hidden">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            <div id="hud">
+                <div class="hud-item">SCORE: <span id="score">0</span></div>
+                <div class="hud-item">LIVES: <span id="lives">3</span></div>
+                <div class="hud-item">LEVEL: <span id="level">1</span></div>
+                <div class="hud-item">POWER: <span id="power">NORMAL</span></div>
+                <div class="hud-item">MISSION: <span id="missionText">CLEAR PATH</span></div>
+                <div class="hud-item">PROGRESS: <span id="missionProgress">0/10</span></div>
+            </div>
+            <div id="bossWarning" class="hidden">
+                ⚠️ BOSS INCOMING! ⚠️<br>
+                ASTEROID MOTHER DETECTED!
+            </div>
+        </div>
+
+        <!-- Tela de Game Over -->
+        <div id="gameOverScreen" class="screen hidden">
+            <div class="retro-border">
+                <h1>MISSION COMPLETE!</h1>
+                <h2>MISSÃO CONCLUÍDA!</h2>
+                <div class="score-display">
+                    FINAL SCORE: <span id="finalScore">0</span>
+                </div>
+                <div class="missions-completed">
+                    MISSIONS COMPLETED: <span id="missionsCompleted">0/3</span>
+                </div>
+                <div class="time-survived">
+                    TIME SURVIVED: <span id="timeSurvived">0s</span>
+                </div>
+                <p class="mission-message">
+                    "Democratizing Space Exploration"<br>
+                    "Democratizando a Exploração Espacial"<br>
+                    - SERA & Blue Origin -<br><br>
+                    Developed by / Desenvolvido por:<br>
+                    <strong>Davi de Jesus</strong><br>
+                    <span class="secret-note">Easter Egg: ↑↑↓↓←→←→BA</span>
+                </p>
+                <button id="restartButton" class="retro-button">NEW MISSION / NOVA MISSÃO</button>
+                <button id="menuButton" class="retro-button">MENU</button>
+                <button id="viewReplayButton" class="retro-button hidden">VIEW REPLAY / VER REPLAY</button>
+            </div>
+        </div>
+
+        <!-- Tela de Pausa -->
+        <div id="pauseScreen" class="screen hidden">
+            <div class="retro-border">
+                <h1>GAME PAUSED</h1>
+                <h2>JOGO PAUSADO</h2>
+                <div class="current-mission">
+                    CURRENT MISSION: <span id="currentMissionPause">Clear Path</span>
+                </div>
+                <p>SERA Mission in progress...<br>Missão SERA em andamento...</p>
+                <button id="resumeButton" class="retro-button">CONTINUE / CONTINUAR</button>
+                <button id="quitToMenuButton" class="retro-button">MENU</button>
+            </div>
+        </div>
+
+        <!-- Tela de Replay -->
+        <div id="replayScreen" class="screen hidden">
+            <div class="retro-border">
+                <h1>HIGHLIGHT REPLAY</h1>
+                <h2>REPLAY DO MOMENTO</h2>
+                <canvas id="replayCanvas" width="800" height="600"></canvas>
+                <div class="replay-info">
+                    <p>Last 5 seconds of epic gameplay</p>
+                    <p>Últimos 5 segundos de gameplay épico</p>
+                </div>
+                <button id="closeReplayButton" class="retro-button">BACK TO MENU / VOLTAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área para notificações de missão -->
+    <div id="missionNotifications"></div>
+
+    <script src="game.js"></script>
+</body>
+</html>

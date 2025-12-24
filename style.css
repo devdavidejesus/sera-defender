@@ -1,0 +1,536 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #0ff;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+#gameContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #001122, #003366);
+    animation: screenFadeIn 0.5s ease-out;
+}
+
+@keyframes screenFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Bordas Retrô */
+.retro-border {
+    border: 4px solid #0ff;
+    padding: 2rem;
+    background: #001122;
+    box-shadow: 0 0 20px #0ff, inset 0 0 20px #0ff;
+    text-align: center;
+    min-width: 500px;
+    animation: borderPulse 3s infinite alternate;
+}
+
+@keyframes borderPulse {
+    0% { box-shadow: 0 0 20px #0ff, inset 0 0 20px #0ff; }
+    100% { box-shadow: 0 0 30px #0f0, inset 0 0 30px #0f0; }
+}
+
+/* Bordas para tela de história */
+.story-border {
+    animation: storyGlow 2s infinite alternate;
+}
+
+@keyframes storyGlow {
+    0% { 
+        border-color: #0ff;
+        box-shadow: 0 0 25px #0ff, inset 0 0 25px #0ff;
+    }
+    100% { 
+        border-color: #f0f;
+        box-shadow: 0 0 35px #f0f, inset 0 0 35px #f0f;
+    }
+}
+
+/* Títulos */
+h1 {
+    font-size: 3rem;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    margin-bottom: 0.5rem;
+    letter-spacing: 3px;
+    animation: titleGlow 2s infinite alternate;
+}
+
+@keyframes titleGlow {
+    0% { text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
+    100% { text-shadow: 0 0 15px #0ff, 0 0 30px #0ff, 0 0 40px #0ff; }
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #ff0;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 5px #ff0;
+    animation: subtitleShimmer 3s infinite;
+}
+
+@keyframes subtitleShimmer {
+    0%, 100% { color: #ff0; text-shadow: 0 0 5px #ff0; }
+    50% { color: #ffa500; text-shadow: 0 0 10px #ffa500; }
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: #0f0;
+    margin: 1rem 0 0.5rem 0;
+    text-shadow: 0 0 5px #0f0;
+}
+
+/* Texto Pixelado */
+.pixel-text {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.instructions {
+    margin: 1.5rem 0;
+    line-height: 1.6;
+    color: #0f0;
+    font-size: 1rem;
+    background: rgba(0, 255, 0, 0.1);
+    padding: 1rem;
+    border: 1px solid #0f0;
+}
+
+/* Texto da História */
+.story-text {
+    text-align: left;
+    margin: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #0ff;
+    background: rgba(0, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 5px;
+}
+
+.story-text p {
+    margin: 0.5rem 0;
+    padding: 0.3rem 0;
+    border-bottom: 1px dotted rgba(0, 255, 255, 0.3);
+}
+
+.story-text strong {
+    color: #ff0;
+}
+
+.mission-quote {
+    margin: 2rem;
+    padding: 1rem;
+    border-left: 4px solid #ff0;
+    font-style: italic;
+    color: #ff0;
+    background: rgba(255, 255, 0, 0.1);
+    font-size: 1.1rem;
+    animation: quotePulse 4s infinite;
+}
+
+@keyframes quotePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+.countdown {
+    font-size: 2rem;
+    color: #f00;
+    animation: pulse 1s infinite;
+    margin: 1rem 0;
+    font-weight: bold;
+    text-shadow: 0 0 10px #f00;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Botões Retrô */
+.retro-button {
+    background: #001122;
+    color: #0ff;
+    border: 2px solid #0ff;
+    padding: 12px 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    min-width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.retro-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.retro-button:hover::before {
+    left: 100%;
+}
+
+.retro-button:hover {
+    background: #0ff;
+    color: #001122;
+    box-shadow: 0 0 15px #0ff;
+    transform: translateY(-2px);
+}
+
+.retro-button:active {
+    transform: translateY(1px);
+}
+
+/* HUD do Jogo */
+#hud {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    text-shadow: 2px 2px 0 #000;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    animation: hudGlow 4s infinite alternate;
+}
+
+@keyframes hudGlow {
+    0% { border-color: #0f0; box-shadow: 0 0 10px #0f0; }
+    100% { border-color: #0ff; box-shadow: 0 0 15px #0ff; }
+}
+
+.hud-item {
+    margin-bottom: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 5px 10px;
+    border: 1px solid #0f0;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    min-width: 200px;
+}
+
+.hud-item:last-child {
+    margin-bottom: 0;
+}
+
+.hud-item span {
+    color: #ff0;
+    font-weight: bold;
+}
+
+/* Canvas do Jogo */
+#gameCanvas {
+    border: 2px solid #0ff;
+    background: #000;
+    box-shadow: 0 0 30px #0ff;
+    animation: canvasGlow 5s infinite alternate;
+}
+
+@keyframes canvasGlow {
+    0% { box-shadow: 0 0 30px #0ff; }
+    100% { box-shadow: 0 0 40px #f0f; }
+}
+
+#replayCanvas {
+    border: 2px solid #ff0;
+    background: #000;
+    margin: 1rem 0;
+    box-shadow: 0 0 20px #ff0;
+}
+
+/* Logo */
+.logo {
+    margin: 1rem 0;
+    padding: 10px;
+    border: 1px solid #fff;
+    background: rgba(0, 255, 255, 0.1);
+    animation: logoFloat 3s infinite ease-in-out;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Informações do Desenvolvedor */
+.developer-info {
+    margin: 1rem 0;
+    padding: 10px;
+    border: 1px solid #0ff;
+    background: rgba(0, 255, 255, 0.1);
+    color: #ff0;
+    font-size: 0.9rem;
+}
+
+.developer-info strong {
+    color: #0f0;
+    font-size: 1.1rem;
+    display: block;
+    margin: 5px 0;
+}
+
+.developer-info small {
+    color: #0ff;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.high-score {
+    margin-top: 1rem;
+    color: #ff0;
+    font-size: 1.2rem;
+    padding: 10px;
+    border: 2px solid #ff0;
+    background: rgba(255, 255, 0, 0.1);
+}
+
+.score-display {
+    font-size: 2rem;
+    color: #ff0;
+    margin: 1rem 0;
+    text-shadow: 0 0 10px #ff0;
+    animation: scorePulse 2s infinite;
+}
+
+@keyframes scorePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.missions-completed, .time-survived {
+    font-size: 1.2rem;
+    color: #0ff;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.mission-message {
+    margin: 1.5rem 0;
+    color: #0f0;
+    font-style: italic;
+    line-height: 1.5;
+    padding: 1rem;
+    border: 1px solid #0f0;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.secret-note {
+    color: #f0f;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    display: block;
+    margin-top: 10px;
+}
+
+.current-mission {
+    color: #ff0;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    background: rgba(255, 255, 0, 0.1);
+}
+
+.replay-info {
+    color: #0ff;
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+/* Aviso de Chefão */
+#bossWarning {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 0, 0, 0.9);
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 2rem;
+    border: 4px solid #ff0;
+    text-align: center;
+    z-index: 1000;
+    animation: bossWarning 0.5s infinite alternate;
+    text-shadow: 2px 2px 0 #000;
+}
+
+@keyframes bossWarning {
+    0% { 
+        transform: translate(-50%, -50%) scale(1);
+        background: rgba(255, 0, 0, 0.9);
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(1.1);
+        background: rgba(255, 69, 0, 0.9);
+    }
+}
+
+/* Notificações de Missão */
+#missionNotifications {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.mission-notification {
+    background: rgba(0, 0, 0, 0.9);
+    border: 3px solid #0f0;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    color: #0f0;
+    font-size: 1.1rem;
+    animation: missionPopup 0.5s, missionFadeOut 0.5s 2.5s forwards;
+    min-width: 300px;
+    text-align: center;
+}
+
+@keyframes missionPopup {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes missionFadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(100%); }
+}
+
+.mission-popup {
+    text-align: center;
+}
+
+.mission-popup h3 {
+    color: #ff0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.mission-popup p {
+    margin: 0.3rem 0;
+    color: #0ff;
+}
+
+/* Efeito de Scanlines */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0) 50%,
+        rgba(0, 0, 0, 0.15) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1000;
+    animation: scanlines 10s linear infinite;
+}
+
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 8px; }
+}
+
+/* Efeito de partículas no fundo */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 50, 100, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(100, 0, 100, 0.3) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .retro-border {
+        min-width: 90%;
+        padding: 1rem;
+        margin: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+    
+    .retro-button {
+        min-width: 150px;
+        font-size: 1rem;
+        padding: 10px 16px;
+    }
+    
+    .story-text {
+        font-size: 0.9rem;
+        padding: 1rem;
+        margin: 1rem;
+    }
+    
+    #hud {
+        font-size: 0.9rem;
+        padding: 5px;
+    }
+    
+    .hud-item {
+        min-width: 150px;
+    }
+}
