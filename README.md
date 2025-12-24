@@ -10,11 +10,13 @@
 [![GitHub](https://img.shields.io/badge/GitHub-devdavidejesus-black)](https://github.com/devdavidejesus)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
+**🎮 Play Now:** [https://devdavidejesus.github.io/sera-defender/](https://devdavidejesus.github.io/sera-defender/)
+
 ## 🎮 About the Game
 
 Protect the New Shepard rocket in this epic retro arcade game! Features story missions, boss fights, power-ups, and secret Easter eggs. A tribute to space exploration and democratization.
 
-## ✨ **NEW ENHANCED FEATURES (v2.0.0)**
+## ✨ Features
 
 ### 🎯 **Mission System**
 - **Clear Path Mission**: Destroy 10 asteroids
@@ -95,16 +97,12 @@ Complete missions, defeat the boss, and achieve the highest score while protecti
 - **Animations**: CSS Keyframes, Canvas rendering
 - **Responsive**: CSS Media Queries
 
-## 🌐 **How to Run**
+## 🚀 How to Run Locally
 
-### **Option 1: Direct Open**
-1. Download all files
-2. Open `index.html` in any modern browser
-
-### **Option 2: Local Server**
 ```bash
-# Python 3
-python -m http.server 8000
+# Clone the repository
+git clone https://github.com/devdavidejesus/sera-defender.git
 
-# Node.js with http-server
-npx http-server
+# Open index.html in browser
+# Or use a local server:
+python -m http.server 8000
